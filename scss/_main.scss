@@ -1,0 +1,267 @@
+$font-colors: (
+    "light": $color-text-light,
+    "dark": $color-text-dark
+);
+
+@mixin link($size, $color, $decoration: underline) {    
+    font-size: $size;
+    color: $color;
+    text-decoration: $decoration;    
+}
+
+@mixin button($background, $color, $font-size) {
+    font-family: $font-primary;
+    font-size: 16px;    
+    font-weight: 600;
+    width: 142px;
+    height: 48px;
+    border: none;
+    border-radius: 3px;
+    color: $color;
+    background-color: $background;
+}
+
+@mixin font($size, $height: inherit, $weight: normal, $style: normal) {
+    font-size: $size;
+    line-height: $height;
+    font-weight: $weight;
+    font-style: $style;
+}
+
+%font-main {
+    font-family: $font-primary;    
+}
+
+%font-secondary {
+    font-family: $font-additional;
+}
+
+%color-theme {
+    color: $color-theme;
+}
+
+%colored-span {        
+    display: inline-block;    
+    letter-spacing: 0.018em;
+    background-color: $color-highlight;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;    
+}
+
+body {
+    @extend %font-main;
+    background-color: $color-background;
+}
+
+.header {
+    width: 100%;
+    background-image: url($headerBackgroundImg);    
+    background-size: cover;
+    background-position: center;    
+    background-repeat: no-repeat;
+    border-bottom-right-radius: 40% 38%;   
+}
+
+.header-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 720px;
+    max-width: 1100px;    
+    padding: 20px 192px 175px;
+}
+
+.landing-logo p {
+    @extend %color-theme;
+    @extend %font-secondary;
+    @include font($size: 24px, $height: 20px, $weight: bold);
+    display: inline-block;    
+    vertical-align: top;    
+    padding-left: 11px;
+    margin-top: 5px;
+}
+
+.landing-logo span {
+    display: block;
+    font-size: 10px;
+    padding-left: 10px;
+}
+
+.header_heading {
+    @extend %color-theme;
+    @include font($size: 70px, $height: 1.02em, $weight: bold);    
+    letter-spacing: 0.015em;
+    padding-top: 8px;
+
+    .colored-span {        
+        @extend %colored-span;
+        background: linear-gradient(to bottom, transparent 33%, $color-highlight 33%);
+    }
+    
+}
+
+.header_text {
+    @extend %color-theme;
+    line-height: 1.5em;
+    letter-spacing: 0.025em;
+}
+
+.header_button {
+    @include button($color-button, $color-text-light, 16px);
+    transition: all 0.3s, ease-in-out;    
+}
+
+.header_button:hover, .section_banner .section_banner_button:hover {    
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.45);
+    background-color: lighten($color-button, 5%);
+}
+
+.login { 
+    @include link($size: 20px, $color: $color-text-light); 
+    display: inline-block;    
+    margin-left: 150px;
+    text-decoration: underline 2px;
+    text-underline-offset: 2px;  
+    padding: 5px; 
+    transition: transform 0.3s ease-in; 
+}
+
+.section_link {
+    @include link($size: 16px, $color: $color-text-light); 
+    transition: transform 0.3s ease-in-out;
+}
+
+.login:hover, .section_link:hover {
+    transform: scale(1.05); 
+    text-shadow: 2px 2px 3px darken(#fff, 45%); 
+ }
+
+.section {    
+    margin: 0 auto;
+    text-align: center;    
+}
+
+.section_text {
+    @extend %color-theme;
+    @include font($size: 42px, $weight: 600);    
+    padding: 30px 0 29px 21px;    
+
+    > .colored-span {
+        display: inline-block;
+        line-height: 1.6em;
+        background: linear-gradient(to top, transparent 20%, $color-highlight 20%);
+    }
+}
+
+.section_card_wrap {
+    max-width: 1116px;
+    margin: 0 auto;
+}
+    
+.section_card {
+    background-color: $color-article;
+    display: flex;
+    height: 326px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+
+    .section_card_img {        
+        border-radius: 6px;
+        object-fit: contain;
+    }
+
+    .section_card_right_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: map-get($font-colors, "light");
+        padding: 48px 90px 30px 90px;
+
+        >.section_card_heading {
+            @include font($size: 22px, $weight: 600);            
+            letter-spacing: 0.04em;
+            padding-bottom: 24px;
+        }
+
+        > .section_card_text {
+            @extend %font-secondary;           
+            line-height: 1.5em;
+            text-align: justify;
+        }
+    }
+}
+
+.banner-background-wrap {
+    background: linear-gradient($color-background 50%, $color-article 50%);
+}
+
+.section_banner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(to right, $banner-gradient-start, $banner-gradient-end);
+    border-radius: 6px;
+    margin: 147px auto 0;
+    max-width: 1200px;
+    height: 144px;    
+    
+    .section_banner_text_wrap {
+       padding-bottom: 30px; 
+       text-align: left;
+    }
+
+    & .section_banner_heading {
+        @extend %color-theme;
+        font-size: 30px;        
+        font-weight: bold;
+        padding-bottom: 6px;
+
+        .colored-span {
+            @extend %colored-span;
+            line-height: 2em;
+            background: linear-gradient(to top, transparent 20%, $color-highlight 20%)
+        }
+    }
+
+    .section_banner_text {
+        color: map-get($font-colors, "light");
+    }
+
+    .section_banner_button {
+        @include button($color-button, $color-text-light, 16px);
+    }
+}
+
+.footer {
+    background-color: $color-article;  
+    color: map-get($font-colors, "light");  
+
+    .footer-wrap {
+        max-width: 1600px;
+        padding: 4px 30px 0 33px;
+        height: 168px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+    
+        .footer_logo p{
+            color: white;  
+        }
+         
+        .footer_text {
+            max-width: 300px;           
+            font-size: 14px;
+        } 
+    
+        .footer-cr {
+            padding-left: 10px;
+        }
+    }
+}
